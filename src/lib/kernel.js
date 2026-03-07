@@ -6,8 +6,6 @@ export default async function kernel(img, matrix, power = 1, multiplier = 1.0, r
     ctx.drawImage(img, 0, 0);
 
     let currentImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
-    // Rotate matrix if needed
     let processedMatrix = matrix.map(row => [...row]);
     if (rotate > 0) {
         const ringIndices = [
