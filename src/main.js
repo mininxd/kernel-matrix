@@ -1,5 +1,5 @@
 import "./app.css";
-import kernel from "./lib/blur.js";
+import kernel from "./lib/kernel.js";
 import { saveState, loadState } from "./lib/state.js";
 
 const fileInput = document.getElementById("file-input");
