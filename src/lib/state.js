@@ -4,7 +4,9 @@ export function saveState() {
     power: document.getElementById("power").value,
     rotate: document.getElementById("rotate").value,
     rotation: document.getElementById("rotation").value,
-    matrix: Array.from(document.querySelectorAll("#matrix-grid input")).map(input => input.value)
+    matrix: Array.from(document.querySelectorAll("#matrix-grid input")).map(
+      (input) => input.value,
+    ),
   };
   localStorage.setItem("image-kernel-state", JSON.stringify(state));
 }
@@ -15,11 +17,13 @@ export function loadState() {
 
   try {
     const state = JSON.parse(saved);
-    if (state.multiplier) document.getElementById("multiplier").value = state.multiplier;
+    if (state.multiplier)
+      document.getElementById("multiplier").value = state.multiplier;
     if (state.power) document.getElementById("power").value = state.power;
     if (state.rotate) document.getElementById("rotate").value = state.rotate;
-    if (state.rotation) document.getElementById("rotation").value = state.rotation;
-    
+    if (state.rotation)
+      document.getElementById("rotation").value = state.rotation;
+
     if (state.matrix) {
       const inputs = document.querySelectorAll("#matrix-grid input");
       state.matrix.forEach((val, i) => {

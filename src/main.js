@@ -19,9 +19,10 @@ const resultPlaceholder = document.getElementById("result-placeholder");
 
 resultImg.addEventListener("click", () => {
   if (!resultImg.src || resultImg.src.endsWith("-")) return;
-  
+
   const link = document.createElement("a");
-  const randomName = "blur-" + Math.random().toString(36).substring(2, 9) + ".png";
+  const randomName =
+    "blur-" + Math.random().toString(36).substring(2, 9) + ".png";
   link.download = randomName;
   link.href = resultImg.src;
   link.click();
@@ -33,12 +34,12 @@ let originalImage = null;
 loadState();
 
 // Add event listeners to save state on change
-[multiplierInput, powerInput, rotateInput, rotationInput].forEach(el => {
+[multiplierInput, powerInput, rotateInput, rotationInput].forEach((el) => {
   el?.addEventListener("change", saveState);
   el?.addEventListener("input", saveState);
 });
 
-matrixGrid.querySelectorAll("input").forEach(el => {
+matrixGrid.querySelectorAll("input").forEach((el) => {
   el.addEventListener("change", saveState);
   el.addEventListener("input", saveState);
   el.addEventListener("blur", (e) => {
@@ -52,7 +53,7 @@ matrixGrid.querySelectorAll("input").forEach(el => {
   });
 });
 
-[multiplierInput, powerInput, rotateInput].forEach(el => {
+[multiplierInput, powerInput, rotateInput].forEach((el) => {
   el?.addEventListener("blur", (e) => {
     let val = e.target.value;
     if (val === "" || val === ".") {
@@ -75,7 +76,7 @@ fileInput.addEventListener("change", (e) => {
         previewImg.src = event.target.result;
         previewImg.classList.remove("hidden");
         previewPlaceholder.classList.add("hidden");
-        
+
         // Reset result
         resultImg.classList.add("hidden");
         resultPlaceholder.classList.remove("hidden");
@@ -114,7 +115,14 @@ applyBtn.addEventListener("click", async () => {
   applyBtn.textContent = "Processing...";
 
   try {
-    const resultDataUrl = await kernel(originalImage, matrix, power, multiplier, rotateSteps, rotationDirection);
+    const resultDataUrl = await kernel(
+      originalImage,
+      matrix,
+      power,
+      multiplier,
+      rotateSteps,
+      rotationDirection,
+    );
     resultImg.src = resultDataUrl;
     resultImg.classList.remove("hidden");
     resultPlaceholder.classList.add("hidden");
