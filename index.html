@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>blur</title>
+  </head>
+  <body class="px-2 my-4">
+    <h1 class="p-2 text-2xl text-center font-bold">Image Kernel Changer</h1>
+    <div class="flex flex-col items-center gap-4 p-4 max-w-4xl mx-auto">
+      <input id="file-input" type="file" class="file-input file-input-bordered w-full max-w-xs" accept="image/*" />
+      
+      <div class="flex flex-row gap-4 justify-center w-full">
+        <div class="form-control">
+          <label class="input">
+            <span class="opacity-40">Multiplier</span>
+          <input id="multiplier" type="number" step="0.0001" value="1"/>
+          </label>
+        </div>
+        <div class="form-control">
+          <label class="input"><span class="opacity-40">Power</span>
+          <input id="power" type="number" placeholder="Power" value="1" />
+          </label>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-center gap-2">
+        <label class="label">3x3 Kernel Matrix</label>
+        <div id="matrix-grid" class="grid grid-cols-3 gap-1">
+          <input type="number" step="0.1" class="input input-sm w-16 text-center" value="0" />
+          <input type="number" step="0.1" class="input input-sm w-16 text-center" value="0" />
+          <input type="number" step="0.1" class="input input-sm w-16 text-center" value="0" />
+          <input type="number" step="0.1" class="input input-sm w-16 text-center" value="0" />
+          <input type="number" step="0.1" class="input input-sm w-16 text-center" value="1" />
+          <input type="number" step="0.1" class="input input-sm w-16 text-center" value="0" />
+          <input type="number" step="0.1" class="input input-sm w-16 text-center" value="0" />
+          <input type="number" step="0.1" class="input input-sm w-16 text-center" value="0" />
+          <input type="number" step="0.1" class="input input-sm w-16 text-center" value="0" />
+        </div>
+      </div>
+      <div class="join">
+        <input id="rotate" type="number" class="input join-item w-24" placeholder="rotation"/>
+  <select id="rotation" class="select join-item">
+    <option disabled>Select Rotation</option>
+    <option selected>clockwise</option>
+    <option>counter clockwise</option>
+  </select>
+      </div>
+      <div class="flex gap-2 w-full max-w-xs">
+        <button id="apply-btn" class="btn btn-primary w-full">Apply Kernel</button>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 w-full mt-8">
+        <div class="flex flex-col items-center">
+          <h2 class="text-lg font-semibold mb-2">Preview</h2>
+          <div class="border rounded-lg overflow-hidden bg-base-200 min-h-[150px] flex items-center justify-center w-full">
+            <img id="preview-img" src="-" alt="Preview" class="max-w-full h-auto hidden" />
+            <span id="preview-placeholder" class="text-gray-400 text-center p-4">No image selected</span>
+          </div>
+        </div>
+        <div class="flex flex-col items-center">
+          <h2 class="text-lg font-semibold mb-2">Result</h2>
+          <div class="border rounded-lg overflow-hidden bg-base-200 min-h-[150px] flex items-center justify-center w-full">
+            <img id="result-img" src="-" alt="Result" class="max-w-full h-auto hidden" />
+            <span id="result-placeholder" class="text-gray-400 text-center p-4">Process an image to see result</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
