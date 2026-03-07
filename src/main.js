@@ -21,7 +21,7 @@ resultImg.addEventListener("click", () => {
 
   const link = document.createElement("a");
   const randomName =
-    "blur-" + Math.random().toString(36).substring(2, 9) + ".png";
+  Math.random().toString(36).substring(2, 9) + ".png";
   link.download = randomName;
   link.href = resultImg.src;
   link.click();
@@ -80,7 +80,7 @@ fileInput.addEventListener("change", (e) => {
         resultImg.classList.add("hidden");
         resultPlaceholder.classList.remove("hidden");
       };
-      img.src = event.target.result;
+      img.src = event.target.result
     };
     reader.readAsDataURL(file);
   }
