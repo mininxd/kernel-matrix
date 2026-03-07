@@ -8,7 +8,6 @@ const powerInput = document.getElementById("power");
 const matrixGrid = document.getElementById("matrix-grid");
 const applyBtn = document.getElementById("apply-btn");
 
-// New inputs added by user
 const rotateInput = document.getElementById("rotate");
 const rotationInput = document.getElementById("rotation");
 
