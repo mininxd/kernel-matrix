@@ -5,6 +5,7 @@ export default async function kernel(
   multiplier = 1.0,
   rotate = 0,
   rotation = "clockwise",
+  focal_point = "5"
 ) {
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
@@ -44,8 +45,24 @@ export default async function kernel(
 
   const rows = processedMatrix.length;
   const cols = processedMatrix[0].length;
-  const offsetR = Math.floor(rows / 2);
-  const offsetC = Math.floor(cols / 2);
+  let offsetR = Math.floor(rows / 2);
+  let offsetC = Math.floor(cols / 2);
+
+  const focalMap = {
+    "top left": [0, 0], "1": [0, 0],
+    "top": [0, 1], "2": [0, 1],
+    "top right": [0, 2], "3": [0, 2],
+    "left": [1, 0], "4": [1, 0],
+    "center": [1, 1], "5": [1, 1],
+    "right": [1, 2], "6": [1, 2],
+    "bottom left": [2, 0], "7": [2, 0],
+    "bottom": [2, 1], "8": [2, 1],
+    "bottom right": [2, 2], "9": [2, 2]
+  };
+
+  if (focalMap[focal_point]) {
+    [offsetR, offsetC] = focalMap[focal_point];
+  }
 
   const iterations = Math.max(1, Math.floor(power));
 

@@ -4,6 +4,7 @@ export function saveState() {
     power: document.getElementById("power").value,
     rotate: document.getElementById("rotate").value,
     rotation: document.getElementById("rotation").value,
+    focal_point: document.getElementById("focal_point").value,
     matrix: Array.from(document.querySelectorAll("#matrix-grid input")).map(
       (input) => input.value,
     ),
@@ -23,6 +24,8 @@ export function loadState() {
     if (state.rotate) document.getElementById("rotate").value = state.rotate;
     if (state.rotation)
       document.getElementById("rotation").value = state.rotation;
+    if (state.focal_point)
+      document.getElementById("focal_point").value = state.focal_point;
 
     if (state.matrix) {
       const inputs = document.querySelectorAll("#matrix-grid input");

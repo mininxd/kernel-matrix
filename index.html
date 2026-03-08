@@ -91,30 +91,44 @@
           />
         </div>
       </div>
-      <div class="join">
+      <div class="flex justify-center">
+      <div class="join w-full">
         <input
           id="rotate"
           type="number"
-          class="input join-item w-24"
+          class="input join-item w-12"
           placeholder="rotation"
         />
-        <select id="rotation" class="select join-item">
-          <option disabled>Select Rotation</option>
+        <select id="rotation" class="select join-item w-32">
+          <option disabled>Rotation</option>
           <option selected>clockwise</option>
           <option>counter clockwise</option>
         </select>
+              <select id="focal_point" class="select join-item w-auto">
+          <option disabled>Focal Point</option>
+          <option selected>center</option>
+          <option>top left</option>
+          <option>top</option>
+          <option>top right</option>
+          <option>left</option>
+          <option>right</option>
+          <option>bottom left</option>
+          <option>bottom</option>
+          <option>bottom right</option>
+        </select>
+      </div>
       </div>
       <div class="flex justify-center w-full max-w-xs">
         <button id="apply-btn" class="btn btn-primary btn-wide">
-          Apply Kernel
+          Apply Kernel <kbd class="kbd kbd-xs bg-primary opacity-75 text-xs">ctrl + space</kbd>
+
         </button>
       </div>
 
-      <div class="grid grid-cols-2 gap-4 mt-8">
+      <div class="grid grid-cols-2 gap-4 mt-2">
         <div class="flex flex-col items-center">
-          <h2 class="text-lg font-semibold mb-2">Preview</h2>
           <div
-            class="border rounded-lg overflow-hidden bg-base-200 min-h-[150px] flex items-center justify-center w-full"
+            class="border border-base-300 rounded-lg overflow-hidden bg-base-200 min-h-[150px] min-w-[150px] flex items-center justify-center w-full"
           >
             <img
               id="preview-img"
@@ -123,14 +137,13 @@
               class="max-w-full h-auto hidden"
             />
             <span id="preview-placeholder" class="text-gray-400 text-center p-4"
-              >No image selected</span
+              >Preview</span
             >
           </div>
         </div>
         <div class="flex flex-col items-center">
-          <h2 class="text-lg font-semibold mb-2">Result</h2>
           <div
-            class="border rounded-lg overflow-hidden bg-base-200 min-h-[150px] flex items-center justify-center w-full"
+            class="border border-base-300 rounded-lg overflow-hidden bg-base-200 min-h-[150px] min-w-[150px] flex items-center justify-center w-full"
           >
             <img
               id="result-img"
@@ -139,11 +152,17 @@
               class="max-w-full h-auto hidden"
             />
             <span id="result-placeholder" class="text-gray-400 text-center p-4"
-              >Process an image to see result</span
+              >Result</span
             >
           </div>
         </div>
       </div>
+    </div>
+    <div class="flex justify-center">
+      <a class="mt-4" href="https://github.com/mininxd/kernel-matrix" target="_blank">
+    <span class="text-sm opacity-60 underline"><i class="ri-github-fill"></i>
+Source Code</span>
+    </a>
     </div>
 
     <script type="module" src="/src/main.js"></script>

@@ -1,7 +1,9 @@
+import 'remixicon/fonts/remixicon.css';
 import "./app.css";
 import kernel from "./lib/kernel.js";
 import { saveState, loadState } from "./lib/state.js";
 
+const isMobile = navigator.userAgent.includes("Mobile");
 const fileInput = document.getElementById("file-input");
 const multiplierInput = document.getElementById("multiplier");
 const powerInput = document.getElementById("power");
@@ -10,6 +12,7 @@ const applyBtn = document.getElementById("apply-btn");
 
 const rotateInput = document.getElementById("rotate");
 const rotationInput = document.getElementById("rotation");
+const focalPointInput = document.getElementById("focal_point");
 
 const previewImg = document.getElementById("preview-img");
 const previewPlaceholder = document.getElementById("preview-placeholder");
@@ -33,7 +36,7 @@ let originalImage = null;
 loadState();
 
 // Add event listeners to save state on change
-[multiplierInput, powerInput, rotateInput, rotationInput].forEach((el) => {
+[multiplierInput, powerInput, rotateInput, rotationInput, focalPointInput].forEach((el) => {
   el?.addEventListener("change", saveState);
   el?.addEventListener("input", saveState);
 });
@@ -86,6 +89,13 @@ fileInput.addEventListener("change", (e) => {
   }
 });
 
+window.addEventListener("keydown", (e) => {
+  if (e.ctrlKey && e.code === "Space") {
+    e.preventDefault();
+    applyBtn.click();
+  }
+});
+
 applyBtn.addEventListener("click", async () => {
   if (!originalImage) {
     fileInput.click();
@@ -107,6 +117,7 @@ applyBtn.addEventListener("click", async () => {
   if (rotationDirection === "counter clockwise") {
     rotationDirection = "counter-clockwise";
   }
+  const focalPoint = focalPointInput?.value || "center";
   const multiplier = parseFloat(multiplierInput.value) || 1;
   const power = parseFloat(powerInput.value) || 1;
 
@@ -121,6 +132,7 @@ applyBtn.addEventListener("click", async () => {
       multiplier,
       rotateSteps,
       rotationDirection,
+      focalPoint,
     );
     resultImg.src = resultDataUrl;
     resultImg.classList.remove("hidden");
@@ -131,5 +143,14 @@ applyBtn.addEventListener("click", async () => {
   } finally {
     applyBtn.disabled = false;
     applyBtn.textContent = "Apply Kernel";
+  }
+});
+
+
+
+const kbd = document.querySelectorAll('kbd');
+kbd.forEach((kb) => {
+  if(isMobile) {
+    kb.classList.add("hidden")
   }
 });
