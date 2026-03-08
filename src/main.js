@@ -18,6 +18,8 @@ const previewImg = document.getElementById("preview-img");
 const previewPlaceholder = document.getElementById("preview-placeholder");
 const resultImg = document.getElementById("result-img");
 const resultPlaceholder = document.getElementById("result-placeholder");
+const useAsPreviewBtn = document.getElementById("use-as-preview-btn");
+const resetData = document.getElementById("reset-data");
 
 resultImg.addEventListener("click", () => {
   if (!resultImg.src || resultImg.src.endsWith("-")) return;
@@ -82,10 +84,36 @@ fileInput.addEventListener("change", (e) => {
         // Reset result
         resultImg.classList.add("hidden");
         resultPlaceholder.classList.remove("hidden");
+        useAsPreviewBtn.classList.add("hidden");
       };
       img.src = event.target.result
     };
     reader.readAsDataURL(file);
+  }
+});
+
+useAsPreviewBtn.addEventListener("click", () => {
+  if (!resultImg.src || resultImg.src.endsWith("-")) return;
+
+  const img = new Image();
+  img.onload = () => {
+    originalImage = img;
+    previewImg.src = resultImg.src;
+    previewImg.classList.remove("hidden");
+    previewPlaceholder.classList.add("hidden");
+
+    // Clear result
+    resultImg.classList.add("hidden");
+    resultPlaceholder.classList.remove("hidden");
+    useAsPreviewBtn.classList.add("hidden");
+  };
+  img.src = resultImg.src;
+});
+
+resetData.addEventListener("click", () => {
+  if (confirm("Are you sure you want to reset all data and settings?")) {
+    localStorage.removeItem("image-kernel-state");
+    window.location.reload();
   }
 });
 
@@ -137,6 +165,7 @@ applyBtn.addEventListener("click", async () => {
     resultImg.src = resultDataUrl;
     resultImg.classList.remove("hidden");
     resultPlaceholder.classList.add("hidden");
+    useAsPreviewBtn.classList.remove("hidden");
   } catch (error) {
     console.error("Error processing image:", error);
     alert("An error occurred during processing.");
